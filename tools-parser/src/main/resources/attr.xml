@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDic>
+    <element name="sessionState">
+        <mappingItem value="1" simpleName="正常" defaultName="正常" fullName="正常"/>
+        <mappingItem value="-1" simpleName="下线（人为）" defaultName="下线（人为）" fullName="下线（人为）"/>
+        <mappingItem value="-2" simpleName="过期" defaultName="过期" fullName="过期"/>
+        <mappingItem value="-3" simpleName="下线（系统）" defaultName="下线（系统）" fullName="下线（系统）"/>
+    </element>
+</DataDic>

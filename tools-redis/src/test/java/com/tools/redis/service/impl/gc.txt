@@ -1,0 +1,24 @@
+[GC (Allocation Failure) [PSYoungGen: 65536K->7868K(76288K)] 65536K->7948K(251392K), 0.0097875 secs] [Times: user=0.02 sys=0.00, real=0.01 secs]
+Heap
+ PSYoungGen      total 76288K, used 50076K [0x000000076ab00000, 0x0000000774000000, 0x00000007c0000000)
+  eden space 65536K, 64% used [0x000000076ab00000,0x000000076d438120,0x000000076eb00000)
+  from space 10752K, 73% used [0x000000076eb00000,0x000000076f2af038,0x000000076f580000)
+  to   space 10752K, 0% used [0x0000000773580000,0x0000000773580000,0x0000000774000000)
+ ParOldGen       total 175104K, used 80K [0x00000006c0000000, 0x00000006cab00000, 0x000000076ab00000)
+  object space 175104K, 0% used [0x00000006c0000000,0x00000006c0014010,0x00000006cab00000)
+ Metaspace       used 18459K, capacity 18646K, committed 18944K, reserved 1067008K
+  class space    used 2260K, capacity 2275K, committed 2304K, reserved 1048576K
+
+
+  [GC (Allocation Failure) [PSYoungGen: 65536K->7786K(76288K)] 65536K->7866K(251392K), 0.0074184 secs] [Times: user=0.01 sys=0.01, real=0.01 secs]
+  Heap
+   PSYoungGen      total 76288K, used 49120K [0x000000076ab00000, 0x0000000770000000, 0x00000007c0000000)
+    eden space 65536K, 63% used [0x000000076ab00000,0x000000076d35d6a8,0x000000076eb00000)
+    from space 10752K, 72% used [0x000000076eb00000,0x000000076f29ab70,0x000000076f580000)
+    to   space 10752K, 0% used [0x000000076f580000,0x000000076f580000,0x0000000770000000)
+   ParOldGen       total 175104K, used 80K [0x00000006c0000000, 0x00000006cab00000, 0x000000076ab00000)
+    object space 175104K, 0% used [0x00000006c0000000,0x00000006c0014010,0x00000006cab00000)
+   Metaspace       used 18438K, capacity 18582K, committed 18688K, reserved 1064960K
+    class space    used 2260K, capacity 2275K, committed 2304K, reserved 1048576K
+
+  Process finished with exit code 0

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tools.mybatis.mapping.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.tools.mybatis.model.CFans">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="fans_type" property="fans_type" jdbcType="VARCHAR"/>
+        <result column="create_time" property="create_time" jdbcType="VARCHAR"/>
+        <result column="batch_code" property="batch_code" jdbcType="VARCHAR"/>
+        <result column="target_city" property="target_city" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getListByCondition" resultMap="BaseResultMap" parameterType="com.tools.mybatis.model.PageOptions">
+        select id,mobile,`name`,fans_type,create_time,batch_code,target_city
+        from fans
+        where  create_time > #{startTime} AND create_time &lt;  #{endTime}
+        AND processStatus=0
+        limit #{pageSize}
+
+    </select>
+
+
+    <!-- 批量更新 -->
+    <update id="batchUpdate" parameterType="java.util.Map">
+        update fans
+        <set>
+            <if test="processStatus != null">
+                processStatus = #{processStatus},
+            </if>
+
+            processTime = now()
+        </set>
+        where
+        ID IN
+        <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+
+    <select id="search" resultMap="BaseResultMap">
+
+          select id,mobile,`name`,fans_type,create_time
+
+          from fans
+
+    </select>
+
+    <select id="getCount" resultType="int">
+          select
+            count(1)
+          from
+            fans
+    </select>
+
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<returnsms>
+    <statusbox>
+        <mobile>15023239810</mobile>
+        <taskid>1212</taskid>
+        <status>10</status>
+        <receivetime>2011-12-02 22:12:11</receivetime>
+        <errorcode>DELIVRD</errorcode>
+        <extno>01</extno>
+    </statusbox>
+    <statusbox>
+        <mobile>15023239811</mobile>
+        <taskid>1212</taskid>
+        <status>20</status>
+        <receivetime>2011-12-02 22:12:11</receivetime>
+        <errorcode>2</errorcode>
+        <extno></extno>
+    </statusbox>
+</returnsms>

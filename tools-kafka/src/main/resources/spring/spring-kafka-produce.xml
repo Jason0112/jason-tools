@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
+       xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <int:channel id="outWriteBackLemmaRecordChannel"/>
+
+    <!--<int-kafka:outbound-channel-adapter id="kafkaOutboundChannelAdapter"-->
+                                        <!--kafka-template="kafkaTemplate"-->
+                                        <!--auto-startup="true"-->
+                                        <!--channel="outWriteBackLemmaRecordChannel"-->
+                                        <!--order="3"-->
+                                        <!--topic="writeBackLemmaRecordTopic">-->
+        <!--<int-kafka:request-handler-advice-chain>-->
+            <!--<bean class="org.springframework.integration.handler.advice.RequestHandlerCircuitBreakerAdvice"/>-->
+        <!--</int-kafka:request-handler-advice-chain>-->
+    <!--</int-kafka:outbound-channel-adapter>-->
+<!---->
+
+    <!-- 定义producer的参数 -->
+
+
+    <!-- 创建kafkatemplate需要使用的producerfactory bean -->
+    <bean id="producerFactory" class="org.springframework.kafka.core.DefaultKafkaProducerFactory">
+        <constructor-arg>
+            <bean class="java.util.HashMap">
+                <constructor-arg>
+                    <map>
+                        <entry key="bootstrap.servers" value="${kafka.produce.bootstrap.servers}"/>
+                        <entry key="client.id" value="${kafka.produce.client.id}"/>
+                        <entry key="acks" value="${kafka.produce.acks}"/>
+                        <entry key="retries" value="${kafka.produce.retries}"/>
+                        <entry key="batch.size" value="${kafka.produce.batch.size}"/>
+                        <entry key="linger.ms" value="${kafka.produce.linger.ms}"/>
+                        <entry key="buffer.memory" value="${kafka.produce.buffer.memory}"/>
+                        <entry key="key.serializer" value="${kafka.produce.key.serializer}"/>
+                        <entry key="value.serializer" value="${kafka.produce.value.serializer}"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <!-- 创建kafkatemplate bean，使用的时候，只需要注入这个bean，即可使用template的send消息方法 -->
+    <bean id="KafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
+        <constructor-arg ref="producerFactory"/>
+        <constructor-arg name="autoFlush" value="true"/>
+        <property name="defaultTopic" value="mhb-test"/>
+    </bean>
+
+    <!-- 配置线程池 -->
+    <bean id="topicExecutorService" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 核心线程数 -->
+        <property name="corePoolSize" value="${topicExecutor.core_pool_size}"/>
+        <!-- 最大线程数 -->
+        <property name="maxPoolSize" value="${topicExecutor.max_pool_size}"/>
+        <!-- 队列最大长度 -->
+        <property name="queueCapacity" value="${topicExecutor.queue_capacity}"/>
+        <!-- 线程池维护线程所允许的空闲时间，默认为60s -->
+        <property name="keepAliveSeconds" value="${topicExecutor.keep_alive_seconds}"/>
+
+        <!-- 线程池对拒绝任务（无线程可用）的处理策略，目前只支持AbortPolicy、CallerRunsPolicy；默认为后者 -->
+        <property name="rejectedExecutionHandler">
+            <!-- AbortPolicy:直接抛出java.util.concurrent.RejectedExecutionException异常 -->
+            <!-- CallerRunsPolicy:主线程直接执行该任务，执行完之后尝试添加下一个任务到线程池中，可以有效降低向线程池内添加任务的速度 -->
+            <!-- DiscardOldestPolicy:抛弃旧的任务、暂不支持；会导致被丢弃的任务无法再次被执行 -->
+            <!-- DiscardPolicy:抛弃当前任务、暂不支持；会导致被丢弃的任务无法再次被执行 -->
+            <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"/>
+        </property>
+
+    </bean>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 加载配置文件 -->
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${mq.broker.url}"/>
+    </bean>
+
+    <!-- Spring JMS Template 配置JMS模版 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination">
+            <bean class="org.apache.activemq.command.ActiveMQQueue"/>
+            <!--topic配置 -->
+            <!--<bean class="org.apache.activemq.command.ActiveMQTopic"/>-->
+        </property>
+        <property name="pubSubDomain" value="false"/>
+        <property name="deliveryMode" value="2"/>
+        <property name="sessionTransacted" value="false"/>
+        <property name="messageConverter" ref="messageConverter"/>
+    </bean>
+    <bean id="messageConverter" class="com.tools.activemq.consumer.converter.MQMessageConverter"/>
+
+
+    <bean id="com.tools.default" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="com.tools.default"/>
+    </bean>
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="com.tools.default"/>
+    </bean>
+
+</beans>

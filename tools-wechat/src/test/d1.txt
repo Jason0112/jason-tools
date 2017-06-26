@@ -1,0 +1,31 @@
+0 = {HashMap$Node@5701} "ChatRoomId" -> "0"
+1 = {HashMap$Node@5702} "Sex" -> "2"
+2 = {HashMap$Node@5703} "AttrStatus" -> "98367"
+3 = {HashMap$Node@5704} "Statues" -> "0"
+4 = {HashMap$Node@5705} "PYQuanPin" -> "meinvtama"
+5 = {HashMap$Node@5706} "EncryChatRoomId" ->
+6 = {HashMap$Node@5707} "DisplayName" ->
+7 = {HashMap$Node@5708} "VerifyFlag" -> "0"
+8 = {HashMap$Node@5709} "UniFriend" -> "0"
+9 = {HashMap$Node@5710} "ContactFlag" -> "1"
+10 = {HashMap$Node@5711} "UserName" -> "@c79c4980169ab8b9bf7e6aca697df09ea61ec7ae22fb8b48cd96c72b28844e10"
+11 = {HashMap$Node@5712} "MemberList" -> " size = 0"
+12 = {HashMap$Node@5713} "StarFriend" -> "0"
+13 = {HashMap$Node@5714} "HeadImgUrl" -> "/cgi-bin/mmwebwx-bin/webwxgeticon?seq=1550020&username=@c79c4980169ab8b9bf7e6aca697df09ea61ec7ae22fb8b48cd96c72b28844e10&skey="
+14 = {HashMap$Node@5715} "AppAccountFlag" -> "0"
+15 = {HashMap$Node@5716} "MemberCount" -> "0"
+16 = {HashMap$Node@5717} "RemarkPYInitial" ->
+17 = {HashMap$Node@5583} "City" -> "安庆"
+18 = {HashMap$Node@5718} "NickName" -> "美女她妈"
+19 = {HashMap$Node@5719} "Province" -> "安徽"
+20 = {HashMap$Node@5720} "SnsFlag" -> "49"
+21 = {HashMap$Node@5721} "Alias" ->
+22 = {HashMap$Node@5722} "KeyWord" -> "che"
+23 = {HashMap$Node@5723} "HideInputBarFlag" -> "0"
+24 = {HashMap$Node@5724} "Signature" ->
+25 = {HashMap$Node@5725} "RemarkName" ->
+26 = {HashMap$Node@5726} "RemarkPYQuanPin" ->
+27 = {HashMap$Node@5727} "Uin" -> "0"
+28 = {HashMap$Node@5728} "OwnerUin" -> "0"
+29 = {HashMap$Node@5729} "IsOwner" -> "0"
+30 = {HashMap$Node@5730} "PYInitial" -> "MNTM"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--<property name="minEvictableIdleTimeMillis" value="-1"/>-->
+        <!--<property name="softMinEvictableIdleTimeMillis" value="10000"/>-->
+        <!--<property name="jmxEnabled" value="true"/>-->
+        <!--<property name="jmxNamePrefix" value="youyuan"/>-->
+        <!--<property name="blockWhenExhausted" value="false"/>-->
+        <property name="maxTotal" value="${redis.maxTotal}"/>
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="minIdle" value="${redis.minIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+        <property name="testOnReturn" value="${redis.testOnReturn}"/>
+        <property name="testWhileIdle" value="${redis.testWhileIdle}"/>
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}"/>
+        <!--链接获取方式。队列：false；栈：true -->
+        <!--<property name="lifo" value="false" />-->
+    </bean>
+    <!-- start redis配置 -->
+
+    <!--单机-->
+    <!-- redis的连接池pool，不是必选项：timeout/password  -->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1" value="${redis.master.host}"/>
+        <constructor-arg index="2" value="${redis.master.port}" type="int"/>
+        <constructor-arg index="3" value="${redis.master.timeout}" type="int"/>
+    </bean>
+    <!--集群配置-->
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool" destroy-method="destroy">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <bean name="master" class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.master.host}"/>
+                    <constructor-arg index="1" value="${redis.master.port}" type="int"/>
+                    <constructor-arg index="2" value="master" type="java.lang.String"/>
+                </bean>
+                <bean name="slaver" class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.slaver.host}"/>
+                    <constructor-arg index="1" value="${redis.slaver.port}" type="int"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+    <!-- end redis配置 -->
+</beans>
