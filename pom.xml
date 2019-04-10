@@ -48,7 +48,7 @@
         <javamail.version>1.4.7</javamail.version>
         <protostuff.version>1.0.8</protostuff.version>
         <jdk.version>1.8</jdk.version>
-        <fasterxml.version>2.8.11</fasterxml.version>
+        <fasterxml.version>2.8.11.3</fasterxml.version>
     </properties>
 
     <dependencies>
